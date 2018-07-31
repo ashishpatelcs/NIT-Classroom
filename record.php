@@ -176,6 +176,7 @@
 				var date = new Date();
 				$("#record-time").html(date);
 				var name = $("#class").val();
+				if(name=="") name = "Undefined";
 				var url = "record-class.php?name="+name+"&remarks=1";
 				$.get(url, function(dat, status) {
 					//alert(dat);

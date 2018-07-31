@@ -21,14 +21,6 @@
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/custom.css" type="text/css" rel="stylesheet">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
-  <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-   <!-- main wavesurfer.js lib -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.2.3/wavesurfer.min.js"></script>
-<!-- wavesurfer.js timeline -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.2.3/plugin/wavesurfer.timeline.min.js"></script>
-<!-- wavesurfer.js regions -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.2.3/plugin/wavesurfer.regions.min.js"></script>
-
    <script src="js/custom.js"></script>
    
    <style>
@@ -88,11 +80,17 @@
     <form id="seating" name="seating" action="seating.php" method="POST">
 		<table>
     <tr>
-    <td><p>Select Active Session: </td><td><select style="display: inline;">
-    <option value="test">Test</option>
-    <?php
-    $query = 'select class'
-    ?>
+    <td><p>Select Active Session: </td><td>
+    <select style="display: inline;">
+      <?php
+      $query = 'select class from class where remarks=1';
+      $res = mysqli_query($connection, $query);
+      if(!$res) echo "<option>No active session found!</option>";
+      else {
+        while($row = mysqli_fetch_array($res))
+          echo "<option>".$row['class']."</option>";
+      }
+      ?>
     </select></td>
     </tr>
 		<tr>
